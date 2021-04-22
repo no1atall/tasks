@@ -4,63 +4,48 @@ import React, { useState } from "react";
 
 const Task2 = () => {
   const [veggies, setVeggies] = useState([
-    { veggie: "carrots" },
-    { veggie: "onions" },
-    { veggie: "tomatoes" },
-    { veggie: "peas" },
-    { veggie: "cucumber" },
-    { veggie: "lettuce" },
-    { veggie: "peppers" },
-    { veggie: "eggplant" },
+    { veggie: "carrots", id: 0 },
+    { veggie: "onions", id: 1 },
+    { veggie: "tomatoes", id: 2 },
+    { veggie: "peas", id: 3 },
+    { veggie: "cucumber", id: 4 },
+    { veggie: "lettuce", id: 5 },
+    { veggie: "peppers", id: 6 },
+    { veggie: "eggplant", id: 7 },
   ]);
 
   const [toppings, setToppings] = useState([{ topping: "corn", id: 9 }]);
 
-  const [data, setData] = useState();
+  const veggieOperation = 1;
+  const toppingOperation = 2;
 
-  const addVeggie = () => {};
+  const addVeggie = (veg, id) => {
+    setVeggies([...veggies, { veggie: veg, id }]);
+  };
 
   const deleteVeggie = (id) => {
     setVeggies(veggies.filter((veggie) => veggie.id !== id));
   };
 
-  const addToppings = (veg, index) => {
-    setToppings([...toppings, { topping: veg, id: index }]);
-    console.log(toppings);
+  const addTopping = (veg, id) => {
+    setToppings([...toppings, { topping: veg, id }]);
   };
 
-  const deleteToppings = () => {};
+  const deleteTopping = (id) => {
+    setToppings(toppings.filter((topping) => topping.id !== id));
+  };
 
-  const clickHandler = (veggie, index) => {
-    console.log(veggie.veggie);
-    console.log(index);
+  const clickHandler = (data) => {
+    console.log(data);
 
-    addToppings(veggie.veggie, index);
-    deleteVeggie(index);
-
-    // console.log(e.target.firstChild.data);
-    // setData(e.target.firstChild.data);
-    // console.log(data);
-    // e.preventDefault();
-    // console.log(veggie)
-    // console.log(e);
-    // console.log(e.target.firstChild);
-
-    // setData(e.target.firstChild)
-    // console.log(data)
-
-    // console.log(data)
-
-    // let myData =setData(e.target.firstChild)
-    // console.log(myData)
-    // console.log(data)
-    // setData(e.target.firstChild)
-
-    // let veg = setData(e.target.firstChild)
-    // console.log(veg)
-    // addToppings(veg)
-
-    // console.log( e, veg )
+    if (veggieOperation) {
+      addTopping(data.veggie, data.id);
+      deleteVeggie(data.id);
+    } else {
+      console.log(data.topping, data.id);
+      addVeggie(data.topping, data.id);
+      //   deleteTopping(data.id);
+    }
   };
 
   return (
@@ -70,7 +55,10 @@ const Task2 = () => {
         <div className="column all">
           <ul>
             {veggies.map((veggie, index) => (
-              <li key={veggie.id} onClick={() => clickHandler(veggie, index)}>
+              <li
+                key={veggie.id}
+                onClick={() => clickHandler(veggie, veggieOperation)}
+              >
                 {veggie.veggie}, {index}
               </li>
             ))}
@@ -80,7 +68,12 @@ const Task2 = () => {
           <h2>here is column 2</h2>
           <ul>
             {toppings.map((topping) => (
-              <li key={topping.id}>{topping.topping}</li>
+              <li
+                key={topping.id}
+                onClick={() => clickHandler(topping, toppingOperation)}
+              >
+                {topping.topping}
+              </li>
             ))}
           </ul>
         </div>
