@@ -4,14 +4,14 @@ import React, { useState } from "react";
 
 const Task2 = () => {
   const [veggies, setVeggies] = useState([
-    { veggie: "carrots", id: 1 },
-    { veggie: "onions", id: 2 },
-    { veggie: "tomatoes", id: 3 },
-    { veggie: "peas", id: 4 },
-    { veggie: "cucumber", id: 5 },
-    { veggie: "lettuce", id: 6 },
-    { veggie: "peppers", id: 7 },
-    { veggie: "eggplant", id: 8 },
+    { veggie: "carrots" },
+    { veggie: "onions" },
+    { veggie: "tomatoes" },
+    { veggie: "peas" },
+    { veggie: "cucumber" },
+    { veggie: "lettuce" },
+    { veggie: "peppers" },
+    { veggie: "eggplant" },
   ]);
 
   const [toppings, setToppings] = useState([{ topping: "corn", id: 9 }]);
@@ -20,19 +20,27 @@ const Task2 = () => {
 
   const addVeggie = () => {};
 
-  const deleteVeggie = () => {};
+  const deleteVeggie = (id) => {
+    setVeggies(veggies.filter((veggie) => veggie.id !== id));
+  };
 
-  const addToppings = (veg) => {
-    setToppings([...toppings, { topping: veg, id: 10 }]);
-    // console.log(toppings)
+  const addToppings = (veg, index) => {
+    setToppings([...toppings, { topping: veg, id: index }]);
+    console.log(toppings);
   };
 
   const deleteToppings = () => {};
 
-  const clickHandler = ( e ) => {
-    console.log(e.target.firstChild.data)
-    setData(e.target.firstChild.data)
-    console.log(data)
+  const clickHandler = (veggie, index) => {
+    console.log(veggie.veggie);
+    console.log(index);
+
+    addToppings(veggie.veggie, index);
+    deleteVeggie(index);
+
+    // console.log(e.target.firstChild.data);
+    // setData(e.target.firstChild.data);
+    // console.log(data);
     // e.preventDefault();
     // console.log(veggie)
     // console.log(e);
@@ -62,7 +70,7 @@ const Task2 = () => {
         <div className="column all">
           <ul>
             {veggies.map((veggie, index) => (
-              <li key={veggie.id} onClick={clickHandler}>
+              <li key={veggie.id} onClick={() => clickHandler(veggie, index)}>
                 {veggie.veggie}, {index}
               </li>
             ))}
