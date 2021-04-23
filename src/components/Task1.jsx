@@ -4,20 +4,17 @@ import React, { useState } from "react";
 
 const Task1 = () => {
   const [inputs, setInputs] = useState([
-    { id: "input1", placeholder: "Type Here", textlength: 0 },
-    { id: "input2", placeholder: "Type Here", textlength: 0 },
-    { id: "input3", placeholder: "Type Here", textlength: 0 },
+    { id: "input1", placeholder: "Type Here", type: "text" },
+    { id: "input2", placeholder: "Type Here", type: "password" },
+    { id: "input3", placeholder: "Type Here", type: "email" },
   ]);
 
-  const inputCounter = (e, input) => {
-    let string = e.target.value.length;
+  const [textLength, setTextLength] = useState(0);
+  const [inputType, setInputType] = useState("");
 
-    // input.textlength = string;
-
-    // setInputs( [ {id: input.id, placeholder: input.placeholder, textlength: string}]);
-
-    console.log(string);
-    console.log(input);
+  const inputCounter = (e) => {
+    setTextLength(e.target.value.length);
+    setInputType(e.target.type);
   };
 
   return (
@@ -25,14 +22,16 @@ const Task1 = () => {
       <h1>Task 1</h1>
       {inputs.map((input) => (
         <input
-          type="text"
+          type={input.type}
           key={input.id}
           id={input.id}
           placeholder={input.placeholder}
-          onChange={(e) => inputCounter(e, input)}
+          onChange={(e) => inputCounter(e)}
         />
       ))}
-      <h3>The current input character count is:</h3>
+      <h3>
+        The current input character count is: {textLength}, and the type is: {inputType}
+      </h3>
     </div>
   );
 };
