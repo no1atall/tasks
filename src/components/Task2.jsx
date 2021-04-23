@@ -61,7 +61,7 @@ const Task2 = () => {
       <div className="container">
         <div className="column all">
           <ul>
-            {veggies.map((veggie, index) => (
+            {veggies.map((veggie) => (
               <li
                 key={veggie.id}
                 onClick={() =>
