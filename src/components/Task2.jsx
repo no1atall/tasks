@@ -14,11 +14,11 @@ const Task2 = () => {
     { veggie: "eggplant", id: 7 },
   ]);
 
-  const [toppings, setToppings] = useState([{ topping: "corn", id: 9 }]);
+  const [toppings, setToppings] = useState([]);
 
   const operationType = {
     veggieOperation: 1,
-    toppingOperation: 2
+    toppingOperation: 2,
   };
 
   const addVeggie = (veg, id) => {
@@ -37,11 +37,11 @@ const Task2 = () => {
     setToppings(toppings.filter((topping) => topping.id !== id));
   };
 
-  const clickHandler = (data, operationType) => {
+  const clickHandler = (data, opType) => {
     console.log(data);
-    
-    switch(operationType)
-    {
+    console.log(opType);
+
+    switch (opType) {
       case operationType.veggieOperation:
         addTopping(data.veggie, data.id);
         deleteVeggie(data.id);
@@ -50,7 +50,8 @@ const Task2 = () => {
         addVeggie(data.topping, data.id);
         deleteTopping(data.id);
         break;
-      default: break;
+      default:
+        break;
     }
   };
 
@@ -63,9 +64,11 @@ const Task2 = () => {
             {veggies.map((veggie, index) => (
               <li
                 key={veggie.id}
-                onClick={() => clickHandler(veggie, operationType.veggieOperation)}
+                onClick={() =>
+                  clickHandler(veggie, operationType.veggieOperation)
+                }
               >
-                {veggie.veggie}, {index}
+                {veggie.veggie}
               </li>
             ))}
           </ul>
@@ -76,7 +79,9 @@ const Task2 = () => {
             {toppings.map((topping) => (
               <li
                 key={topping.id}
-                onClick={() => clickHandler(topping, operationType.toppingOperation)}
+                onClick={() =>
+                  clickHandler(topping, operationType.toppingOperation)
+                }
               >
                 {topping.topping}
               </li>

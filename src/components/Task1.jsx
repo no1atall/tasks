@@ -1,5 +1,7 @@
 import React from "react";
 
+//Create a component with 3 input fields.  When you type in the input field a "char count" increases for that input.  Use only ONE state variable and only ONE onChange handler function for all 3 fields
+
 const Task1 = () => {
   const inputCounter = (e) => {
     let string = e.target.value;
