@@ -4,15 +4,24 @@ import React, { useState } from "react";
 
 const Task1 = () => {
   const [inputs, setInputs] = useState([
-    { id: "input1", placeholder: "Type Here", type: "text" },
-    { id: "input2", placeholder: "Type Here", type: "password" },
-    { id: "input3", placeholder: "Type Here", type: "email" },
+    { id: "input1", placeholder: "Type Here", type: "text", textlength: 0 },
+    { id: "input2", placeholder: "Type Here", type: "password", textlength: 0 },
+    { id: "input3", placeholder: "Type Here", type: "email", textlength: 0 },
   ]);
 
   const [textLength, setTextLength] = useState(0);
   const [inputType, setInputType] = useState("");
 
-  const inputCounter = (e) => {
+  const inputCounter = (e, index) => {
+
+    //State used to store textlength in our input object
+
+    let newArr = [...inputs]
+    newArr[index].textlength = e.target.value.length
+    setInputs(newArr)
+
+    //State used to display values in our H3
+
     setTextLength(e.target.value.length);
     setInputType(e.target.type);
   };
@@ -20,13 +29,13 @@ const Task1 = () => {
   return (
     <div>
       <h1>Task 1</h1>
-      {inputs.map((input) => (
+      {inputs.map((input, index) => (
         <input
           type={input.type}
           key={input.id}
           id={input.id}
           placeholder={input.placeholder}
-          onChange={(e) => inputCounter(e)}
+          onChange={(e) => inputCounter(e, index)}
         />
       ))}
       <h3>
